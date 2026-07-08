@@ -8,7 +8,7 @@ JSP page for populating a library database table -->
 <head>
 	<meta charset="UTF-8">
 	<title>Populate Library Database Table</title>
-	<link rel = "stylesheet" href = "tableManagement.css">
+	<link rel = "stylesheet" href = "libraryDatabase.css">
 </head>
 <body>
 	<h1>Populate Library Database Table</h1>

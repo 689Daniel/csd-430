@@ -7,6 +7,9 @@ package coffeeBeans;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBBean implements Serializable {
@@ -105,7 +108,7 @@ public class DBBean implements Serializable {
 				"Harry Potter and the Deathly Hallows"};
 		String[] authors = {"Douglas Adams", "Douglas Adams", "Douglas Adams", "Douglas Adams", "Douglas Adams", "Jules Verne", "J.K. Rowling",
 				"J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling"};
-		String[] series = {"The HitchHiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy",
+		String[] series = {"The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy",
 				"The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy", "Twenty Thousand Leagues Under the Sea", "Harry Potter",
 				"Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter"};
 		int[] years = {1979, 1980, 1982, 1984, 1992, 1870, 1997, 1998, 1999, 2000, 2003, 2005, 2007};
@@ -131,5 +134,18 @@ public class DBBean implements Serializable {
 		} catch(Exception e) {
 			return "An Error occurred accessing the database";
 		}
+	}
+	
+	// Returns a ResultSet containing all the book IDs in the table
+	// Throws an SQLException if an SQL error occurs (such as table not created)
+	public ResultSet getTableIDs() throws SQLException {
+		return statement.executeQuery("SELECT BookID FROM daniel_library_data");
+	}
+	
+	// Returns a ResultSet containing the information for one book based on the provided ID
+	public ResultSet getBookByID(int id) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM daniel_library_data WHERE BookID = ?");
+		preparedStatement.setInt(1, id);
+		return preparedStatement.executeQuery();
 	}
 }

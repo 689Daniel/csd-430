@@ -1,0 +1,75 @@
+h1 {
+	text-align: center;
+	font-size: 4rem;
+}
+
+h2 {
+	text-align: center;
+	font-size: 2rem;
+}
+
+p {
+	text-align: center;
+	font-size: 2rem;
+}
+
+
+a:link, a:visited {
+	color: #007acc;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #006bb3;
+	background-color: #e6f5ff;
+}
+
+.flexContainer {
+	display: flex;
+	justify-content: space-around;
+	margin: 0 auto 0 auto;
+	width: 30%;
+}
+
+.flexContainer a {
+	font-size: 1.5rem;
+}
+
+label {
+	font-size: 1.5rem;
+}
+
+input, select {
+	font-size: 1rem
+}
+
+select, option {
+	padding: 0px 5px 0px 5px;
+	text-align: center;
+}
+
+select, input[type = submit] {
+	border: 2px solid #3399ff;
+	border-radius: 6px;
+	background-color: #f3fbfb;
+}
+
+table.bookDisplay {
+	margin: 20px auto 0 auto;
+	min-width: 50%;
+}
+
+table.bookDisplay, .bookDisplay td, .bookDisplay th{
+	border: 2px solid #3399ff;
+	border-collapse: collapse;
+	font-size: 1.5rem;
+}
+
+.bookDisplay td, .bookDisplay th {
+	padding: 5px 10px 5px 10px;
+	text-align: center;
+}
+
+.bookDisplay th {
+	background-color:  #f3fbfb;
+}

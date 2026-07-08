@@ -6,7 +6,7 @@ JSP page for accessing table creation, population, and deletion pages -->
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "tableManagement.css">
+	<link rel = "stylesheet" href = "libraryDatabase.css">
 	<meta charset="UTF-8">
 	<title>Library Database Home</title>
 </head>
@@ -17,6 +17,10 @@ JSP page for accessing table creation, population, and deletion pages -->
 		<a href = "DanielCreateTable.jsp">Create Table</a>
 		<a href = "DanielPopulateTable.jsp">Populate Table</a>
 		<a href = "DanielDropTable.jsp">Drop Table</a>
+	</div>
+	<h2>Module 2</h2>
+	<div class = "flexContainer">
+		<a href = "DanielReadRecord.jsp">View Books</a>
 	</div>
 </body>
 </html>

@@ -6,7 +6,7 @@ JSP page for dropping a library database table -->
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "tableManagement.css">
+	<link rel = "stylesheet" href = "libraryDatabase.css">
 	<meta charset="UTF-8">
 	<title>Drop Library Database Table</title>
 </head>

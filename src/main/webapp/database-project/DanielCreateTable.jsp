@@ -8,7 +8,7 @@ JSP page for creating a library database table -->
 <head>
 	<meta charset="UTF-8">
 	<title>Create Library Database Table</title>
-	<link rel = "stylesheet" href = "tableManagement.css">
+	<link rel = "stylesheet" href = "libraryDatabase.css">
 </head>
 <body>
 	<h1>Create Library Database Table</h1>
