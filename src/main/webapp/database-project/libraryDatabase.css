@@ -73,3 +73,8 @@ table.bookDisplay, .bookDisplay td, .bookDisplay th{
 .bookDisplay th {
 	background-color:  #f3fbfb;
 }
+
+.centeredForm {
+	display: flex;
+	justify-content: space-around;
+}

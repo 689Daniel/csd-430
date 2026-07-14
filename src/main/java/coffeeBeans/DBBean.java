@@ -1,5 +1,6 @@
-/* Daniel Preller, 7 July 2026, Assignment 5
+/* Daniel Preller, 14 July 2026, Assignment 7
  * JavaBean for accessing a library database, including table creation, population, and deletion
+ * Also includes access methods such as returning all columns, returning a book by ID, and returning all book IDs
  */
 
 package coffeeBeans;
@@ -11,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class DBBean implements Serializable {
 	
@@ -65,6 +67,21 @@ public class DBBean implements Serializable {
 	
 	
 	// Other methods
+	
+	// Returns a string that has had all HTML special characters replaced with HTML entities
+	public String escapeHTML(String string) {
+		return string.replace("&", "&amp").replace("<", "&lt").replace(">", "&gt").replace("'", "&#039").replace("\"", "&quot");
+	}
+	
+	// Sets the specified string to null if it is empty; otherwise keeps it the same
+	// Used for inserting blank strings as null values
+	public String nullIfEmpty(String string) {
+		if (string.isEmpty()) {
+			return null;
+		} else {
+			return string;
+		}
+	}
 	
 	// Connects to database, setting the connection and statement objects in the process
 	public String connectToDatabase() {
@@ -147,5 +164,27 @@ public class DBBean implements Serializable {
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM daniel_library_data WHERE BookID = ?");
 		preparedStatement.setInt(1, id);
 		return preparedStatement.executeQuery();
+	}
+	
+	// Returns a ResultSet containing all records in the table
+	public ResultSet getAllBooks() throws SQLException {
+		return statement.executeQuery("SELECT * FROM daniel_library_data;");
+	}
+	
+	// Updates the table with a new book, taking all non-automatic columns as arguments
+	// Throws an SQL exception if an SQL error occurs, such as invalid input
+	public void addBook(String title, String author, String series, String releaseYear) throws SQLException, NumberFormatException {
+		PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO daniel_library_data (Title, Author, Series, ReleaseYear) VALUES (?, ?, ?, ?);");
+		preparedStatement.setString(1, nullIfEmpty(escapeHTML(title)));
+		preparedStatement.setString(2, nullIfEmpty(escapeHTML(author)));
+		preparedStatement.setString(3, nullIfEmpty(escapeHTML(series)));
+		
+		if (releaseYear.isBlank()) {// Inserts the year or a null column depending on whether the string is empty
+			preparedStatement.setNull(4, Types.INTEGER);
+		} else {
+			preparedStatement.setInt(4, Integer.parseInt(releaseYear));
+		}		
+		
+		preparedStatement.executeUpdate();
 	}
 }

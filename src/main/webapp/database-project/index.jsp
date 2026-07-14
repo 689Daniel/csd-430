@@ -1,5 +1,5 @@
-<!-- Daniel Preller, 7 July 2026, Assignment 5
-JSP page for accessing table creation, population, and deletion pages -->
+<!-- Daniel Preller, 14 July 2026, Assignment 7
+JSP page for accessing all pages in the database assignment -->
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -21,6 +21,10 @@ JSP page for accessing table creation, population, and deletion pages -->
 	<h2>Module 2</h2>
 	<div class = "flexContainer">
 		<a href = "DanielReadRecord.jsp">View Books</a>
+	</div>
+	<h2>Module 3</h2>
+	<div class = "flexContainer">
+		<a href = "DanielAddRecord.jsp">Add Books</a>
 	</div>
 </body>
 </html>
