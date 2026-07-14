@@ -12,17 +12,17 @@ JSP page for accessing all pages in the database assignment -->
 </head>
 <body>
 	<h1>Library Database Home</h1>
-	<h2>Module 1</h2>
+	<h2>Module 5</h2>
 	<div class = "flexContainer">
 		<a href = "DanielCreateTable.jsp">Create Table</a>
 		<a href = "DanielPopulateTable.jsp">Populate Table</a>
 		<a href = "DanielDropTable.jsp">Drop Table</a>
 	</div>
-	<h2>Module 2</h2>
+	<h2>Module 6</h2>
 	<div class = "flexContainer">
 		<a href = "DanielReadRecord.jsp">View Books</a>
 	</div>
-	<h2>Module 3</h2>
+	<h2>Module 7</h2>
 	<div class = "flexContainer">
 		<a href = "DanielAddRecord.jsp">Add Books</a>
 	</div>
