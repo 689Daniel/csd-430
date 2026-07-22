@@ -1,6 +1,7 @@
 /* Daniel Preller, 14 July 2026, Assignment 7
  * JavaBean for accessing a library database, including table creation, population, and deletion
  * Also includes access methods such as returning all columns, returning a book by ID, and returning all book IDs
+ * Also includes methods for adding and updating books
  */
 
 package coffeeBeans;
@@ -118,15 +119,15 @@ public class DBBean implements Serializable {
 	
 	//Populates table from arrays
 	public String populateTable() {
-		String[] titles = {"The Hitchhiker\\'s Guide to the Galaxy", "The Restaurant at the End of the Universe", "Life, the Universe, and Everything",
+		String[] titles = {"The Hitchhiker&#039s Guide to the Galaxy", "The Restaurant at the End of the Universe", "Life, the Universe, and Everything",
 				"So Long, and Thanks for All the Fish", "Mostly Harmless", "Twenty Thousand Leagues Under the Sea",
-				"Harry Potter and the Sorcerer\\'s Stone", "Harry Potter and the Chamber of Secrets", "Harry Potter and the Prisoner of Azkaban",
+				"Harry Potter and the Sorcerer&#039s Stone", "Harry Potter and the Chamber of Secrets", "Harry Potter and the Prisoner of Azkaban",
 				"Harry Potter and the Goblet of Fire", "Harry Potter and the Order of the Phoenix", "Harry Potter and the Half-Blood Prince",
 				"Harry Potter and the Deathly Hallows"};
 		String[] authors = {"Douglas Adams", "Douglas Adams", "Douglas Adams", "Douglas Adams", "Douglas Adams", "Jules Verne", "J.K. Rowling",
 				"J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling", "J.K. Rowling"};
-		String[] series = {"The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy",
-				"The Hitchhiker\\'s Guide to the Galaxy", "The Hitchhiker\\'s Guide to the Galaxy", "Twenty Thousand Leagues Under the Sea", "Harry Potter",
+		String[] series = {"The Hitchhiker&#039s Guide to the Galaxy", "The Hitchhiker&#039s Guide to the Galaxy", "The Hitchhiker&#039s Guide to the Galaxy",
+				"The Hitchhiker&#039s Guide to the Galaxy", "The Hitchhiker&#039s Guide to the Galaxy", "Twenty Thousand Leagues Under the Sea", "Harry Potter",
 				"Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter", "Harry Potter"};
 		int[] years = {1979, 1980, 1982, 1984, 1992, 1870, 1997, 1998, 1999, 2000, 2003, 2005, 2007};
 		
@@ -186,5 +187,19 @@ public class DBBean implements Serializable {
 		}		
 		
 		preparedStatement.executeUpdate();
+	}
+	
+	public void updateBook(int id, String title, String author, String series, int releaseYear) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM daniel_library_data WHERE BookID = ?;");
+		preparedStatement.setInt(1, id);
+		if (preparedStatement.execute()) {// Ensures that only valid IDs can be updated
+			preparedStatement = connection.prepareStatement("UPDATE daniel_library_data SET Title = ?, Author = ?, Series = ?, ReleaseYear = ? WHERE BookID = ?");
+			preparedStatement.setString(1, nullIfEmpty(escapeHTML(title)));
+			preparedStatement.setString(2, nullIfEmpty(escapeHTML(author)));
+			preparedStatement.setString(3, nullIfEmpty(escapeHTML(series)));
+			preparedStatement.setInt(4, releaseYear);
+			preparedStatement.setInt(5, id);
+			preparedStatement.executeUpdate();
+		}
 	}
 }
