@@ -189,6 +189,8 @@ public class DBBean implements Serializable {
 		preparedStatement.executeUpdate();
 	}
 	
+	// Updates a book in the table according to the provided ID
+	// Throws an SQL exception if an SQL error occurs, such as an invalid database connection
 	public void updateBook(int id, String title, String author, String series, int releaseYear) throws SQLException {
 		PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM daniel_library_data WHERE BookID = ?;");
 		preparedStatement.setInt(1, id);
@@ -200,6 +202,20 @@ public class DBBean implements Serializable {
 			preparedStatement.setInt(4, releaseYear);
 			preparedStatement.setInt(5, id);
 			preparedStatement.executeUpdate();
+		}
+	}
+	
+	// Deletes a book in the table according to the provided ID
+	// Returns a string reporting the results of the query, either that the book was deleted or that no matching book was found
+	// Throws an SQL exception if an SQL error occurs, such as an invalid database connection
+	public String deleteBook(int id) throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM daniel_library_data WHERE BookID = ?;");
+		preparedStatement.setInt(1, id);
+		int resultValue = preparedStatement.executeUpdate();
+		if (resultValue == 0) {// If no rows were deleted, says so in the return string
+			return "No books matching id " + id + " were found, so nothing was deleted";
+		} else {// Otherwise, says which book was deleted
+			return "Deleted book number " + id + " from the database";
 		}
 	}
 }

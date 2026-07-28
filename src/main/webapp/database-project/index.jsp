@@ -30,5 +30,9 @@ JSP page for accessing all pages in the database assignment -->
 	<div class = "flexContainer">
 		<a href = "DanielUpdateRecord.jsp">Update Books</a>
 	</div>
+	<h2>Module 9</h2>
+	<div class = "flexContainer">
+		<a href = "DanielDeleteRecord.jsp">Delete Books</a>
+	</div>
 </body>
 </html>
